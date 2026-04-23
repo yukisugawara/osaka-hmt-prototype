@@ -1,0 +1,606 @@
+/* =========================================================
+   大阪大学大学院 人文学研究科 ― プロトタイプ スタイル
+   キーカラー: #353D9D (RGB 53, 61, 157)
+   方針: 色数を抑え、ゴシック書体、グリッドで統一感
+   ========================================================= */
+
+:root {
+  --color-key: #353D9D;          /* 阪大色 */
+  --color-key-dark: #2A3180;
+  --color-key-soft: #EEF0FB;
+  --color-ink: #1A1A1A;
+  --color-ink-muted: #4A4A4A;
+  --color-line: #E5E6EA;
+  --color-bg: #FFFFFF;
+  --color-surface: #F7F7F9;
+  --color-accent: #D94F4F;       /* 出願など注意喚起にごく控えめに */
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 1px 2px rgba(20, 23, 60, 0.06);
+  --shadow-md: 0 6px 20px rgba(20, 23, 60, 0.08);
+  --font-sans: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", "YuGothic", "Meiryo", system-ui, sans-serif;
+  --font-en: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --maxw: 1200px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-bg);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--color-key); color: #fff;
+  padding: 8px 12px; z-index: 1000;
+}
+.skip-link:focus { left: 8px; top: 8px; }
+
+/* ---------------------------------------------------------
+   Header
+--------------------------------------------------------- */
+.site-header {
+  background: #fff;
+  border-bottom: 1px solid var(--color-line);
+  position: sticky; top: 0; z-index: 50;
+}
+
+.header-grid {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 24px;
+}
+
+/* ブランド */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+.brand:hover { text-decoration: none; }
+
+.brand__mark {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px; height: 64px;
+}
+.brand__mark svg,
+.brand__mark img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: block;
+}
+/* Footer: ダークな背景でも公式マークが見えるよう白の台座に載せる */
+.brand__mark--badge {
+  background: #fff;
+  border-radius: 10px;
+  padding: 6px;
+  width: 64px; height: 64px;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+.brand__ja {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+.brand__en-top {
+  font-family: var(--font-en);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--color-ink-muted);
+  margin-top: 4px;
+}
+.brand__en-bottom {
+  font-family: var(--font-en);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--color-ink-muted);
+}
+
+/* Overview pill */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 26px;
+  background: #EEEEF1;
+  color: var(--color-ink);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.98rem;
+  transition: background .15s ease, color .15s ease;
+}
+.pill:hover {
+  background: var(--color-key);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Utility links (top right) */
+.utility {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: right;
+  font-size: 0.84rem;
+  color: var(--color-ink-muted);
+}
+.utility a:hover { color: var(--color-key); }
+.utility__en {
+  font-family: var(--font-en);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--color-ink-muted);
+  font-size: 0.85rem;
+}
+
+/* メインナビ */
+.mainnav {
+  border-top: 1px solid var(--color-line);
+  background: #fff;
+}
+.mainnav__list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+}
+.mainnav__list li + li {
+  border-left: 1px solid var(--color-line);
+}
+.mainnav__list a {
+  display: block;
+  padding: 16px 28px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--color-ink);
+  letter-spacing: 0.04em;
+  transition: color .15s ease, background .15s ease;
+}
+.mainnav__list a:hover {
+  color: var(--color-key);
+  background: var(--color-key-soft);
+  text-decoration: none;
+}
+
+/* ---------------------------------------------------------
+   Hero: 5専攻カード
+--------------------------------------------------------- */
+.hero {
+  padding: 56px 0 24px;
+  background: linear-gradient(180deg, #fff 0%, #fafaff 100%);
+}
+
+.majors {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.major-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 108px;
+  padding: 18px 12px;
+  border-radius: var(--radius-md);
+  background: var(--color-key);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: var(--shadow-sm);
+  transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.major-card:hover {
+  background: var(--color-key-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+.major-card__ja {
+  font-size: 1.12rem;
+  line-height: 1.3;
+}
+.major-card__en {
+  margin-top: 6px;
+  font-family: var(--font-en);
+  font-weight: 500;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+}
+
+/* ---------------------------------------------------------
+   検索 + 願書受付
+--------------------------------------------------------- */
+.search-row {
+  padding: 28px 0 40px;
+}
+.search-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 32px;
+}
+
+.search {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+.search__label {
+  font-weight: 700;
+  font-size: 1.02rem;
+  letter-spacing: 0.04em;
+}
+.search__input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1.5px solid var(--color-line);
+  border-radius: 999px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.search__input:focus {
+  outline: none;
+  border-color: var(--color-key);
+  box-shadow: 0 0 0 3px rgba(53, 61, 157, 0.15);
+}
+.search__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; height: 48px;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-key);
+  color: #fff;
+  cursor: pointer;
+  transition: background .15s ease;
+}
+.search__button:hover { background: var(--color-key-dark); }
+.search__button svg { width: 22px; height: 22px; }
+
+.admissions-cta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  color: var(--color-key);
+  font-weight: 800;
+  font-size: 1.18rem;
+  letter-spacing: 0.04em;
+}
+.admissions-cta:hover { color: var(--color-key-dark); text-decoration: none; }
+.admissions-cta__arrow {
+  font-family: var(--font-en);
+  letter-spacing: -0.04em;
+  transition: transform .15s ease;
+}
+.admissions-cta:hover .admissions-cta__arrow { transform: translateX(4px); }
+
+/* ---------------------------------------------------------
+   Section title
+--------------------------------------------------------- */
+.section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-size: 1.4rem;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+.section-title__en {
+  font-family: var(--font-en);
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  color: var(--color-ink-muted);
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------
+   News grid
+--------------------------------------------------------- */
+.news {
+  padding: 48px 0 64px;
+  background: var(--color-surface);
+}
+.news__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.news__more {
+  color: var(--color-key);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.news-grid {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.news-card a {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 10px;
+  background: #fff;
+  border-radius: var(--radius-md);
+  padding: 12px 12px 20px;
+  height: 100%;
+  box-shadow: var(--shadow-sm);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.news-card a:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+.news-card__thumb {
+  display: block;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  background-color: #d7d9e6;
+}
+/* プレースホルダー・サムネ（差し替え前提） */
+.news-card__thumb--a { background-image: linear-gradient(135deg, #3b4bb5 0%, #9aa7e8 100%); }
+.news-card__thumb--b { background-image: linear-gradient(135deg, #35599d 0%, #a5c2ec 100%); }
+.news-card__thumb--c { background-image: linear-gradient(135deg, #353d9d 0%, #7a85d1 60%, #c9ceea 100%); }
+.news-card__thumb--d { background-image: linear-gradient(135deg, #2a3180 0%, #6f78c4 100%); }
+
+.news-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 6px;
+  font-size: 0.82rem;
+  color: var(--color-ink-muted);
+  font-family: var(--font-en);
+}
+.news-card__meta time { letter-spacing: 0.04em; }
+.news-card__tag {
+  font-family: var(--font-sans);
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--color-key-soft);
+  color: var(--color-key);
+  font-weight: 700;
+  font-size: 0.76rem;
+}
+.news-card__title {
+  padding: 0 6px;
+  font-weight: 600;
+  font-size: 0.96rem;
+  line-height: 1.55;
+  color: var(--color-ink);
+}
+
+/* ---------------------------------------------------------
+   Message section
+--------------------------------------------------------- */
+.message {
+  padding: 72px 0;
+}
+.message__inner {
+  max-width: 840px;
+}
+.message p {
+  margin: 20px 0 0;
+  font-size: 1.02rem;
+  color: var(--color-ink);
+}
+.message__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 28px !important;
+}
+.link-arrow {
+  color: var(--color-key);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+.link-arrow:hover { color: var(--color-key-dark); }
+
+/* ---------------------------------------------------------
+   Sub features grid
+--------------------------------------------------------- */
+.subgrid {
+  padding: 0 0 80px;
+}
+.subgrid__inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 28px;
+  border-radius: var(--radius-md);
+  color: #fff;
+  min-height: 180px;
+  transition: transform .15s ease, box-shadow .15s ease;
+  background: var(--color-key);
+  box-shadow: var(--shadow-sm);
+}
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+.feature-card--students { background: linear-gradient(135deg, #353D9D 0%, #5563c8 100%); }
+.feature-card--outreach { background: linear-gradient(135deg, #2A3180 0%, #4a55b4 100%); }
+.feature-card--insta    { background: linear-gradient(135deg, #1f2366 0%, #3b4bb5 100%); }
+
+.feature-card__kicker {
+  font-family: var(--font-en);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  opacity: 0.85;
+  text-transform: uppercase;
+}
+.feature-card__title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.feature-card__body {
+  margin-top: auto;
+  font-size: 0.92rem;
+  opacity: 0.92;
+  line-height: 1.6;
+}
+
+/* ---------------------------------------------------------
+   Footer
+--------------------------------------------------------- */
+.site-footer {
+  background: #14173C;
+  color: #dfe2f4;
+  padding: 56px 0 20px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1.9fr;
+  gap: 48px;
+}
+.brand--footer { display: flex; align-items: center; gap: 16px; }
+.brand--footer .brand__ja { color: #fff; }
+.brand--footer .brand__en-top,
+.brand--footer .brand__en-bottom { color: #b5bbe0; }
+
+.footer-address {
+  margin-top: 18px;
+  font-style: normal;
+  color: #b5bbe0;
+  font-size: 0.88rem;
+  line-height: 1.9;
+}
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.footer-nav h3 {
+  margin: 0 0 10px;
+  font-size: 0.92rem;
+  letter-spacing: 0.06em;
+  color: #fff;
+}
+.footer-nav ul {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.footer-nav a {
+  color: #b5bbe0;
+  font-size: 0.9rem;
+}
+.footer-nav a:hover { color: #fff; }
+
+.footer-bottom {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  color: #9aa0c7;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+/* ---------------------------------------------------------
+   Responsive
+--------------------------------------------------------- */
+@media (max-width: 960px) {
+  .header-grid {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "brand utility"
+      "pill  pill";
+    row-gap: 16px;
+  }
+  .brand { grid-area: brand; }
+  .utility { grid-area: utility; }
+  .pill--overview { grid-area: pill; justify-self: start; }
+
+  .mainnav__list { overflow-x: auto; flex-wrap: nowrap; }
+  .mainnav__list a { padding: 14px 18px; white-space: nowrap; }
+
+  .majors { grid-template-columns: repeat(2, 1fr); }
+  .news-grid { grid-template-columns: repeat(2, 1fr); }
+  .subgrid__inner { grid-template-columns: 1fr; }
+
+  .search-grid { grid-template-columns: 1fr; gap: 20px; }
+  .admissions-cta { justify-self: start; }
+
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-nav { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .brand__ja { font-size: 1.08rem; }
+  .brand__mark { width: 52px; height: 52px; }
+  .section-title { font-size: 1.2rem; }
+  .majors { grid-template-columns: 1fr 1fr; }
+  .major-card__ja { font-size: 1rem; }
+  .search { grid-template-columns: 1fr auto; }
+  .search__label { grid-column: 1 / -1; }
+  .news-grid { grid-template-columns: 1fr; }
+}
