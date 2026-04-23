@@ -211,6 +211,60 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   background: linear-gradient(180deg, #fff 0%, #fafaff 100%);
 }
 
+.hero__kicker {
+  font-family: var(--font-en);
+  letter-spacing: 0.22em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-key);
+  margin: 0 0 14px;
+  text-transform: uppercase;
+}
+.hero__slogan {
+  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  font-weight: 900;
+  margin: 0 0 36px;
+  color: var(--color-ink);
+}
+.hero__brk--sp { display: none; }
+
+.major-taglines {
+  list-style: none;
+  padding: 0;
+  margin: 28px 0 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+.major-taglines li {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--color-ink-muted);
+  padding: 14px 14px 16px;
+  border-top: 2px solid var(--color-key);
+  background: #fff;
+  border-radius: 0 0 10px 10px;
+}
+.major-taglines strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-key);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  font-size: 0.95rem;
+}
+
+.news-card__sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-ink-muted);
+  letter-spacing: 0.02em;
+}
+
 .majors {
   list-style: none;
   padding: 0; margin: 0;
@@ -584,8 +638,10 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   .mainnav__list a { padding: 14px 18px; white-space: nowrap; }
 
   .majors { grid-template-columns: repeat(2, 1fr); }
+  .major-taglines { grid-template-columns: repeat(2, 1fr); }
   .news-grid { grid-template-columns: repeat(2, 1fr); }
   .subgrid__inner { grid-template-columns: 1fr; }
+  .hero__brk--sp { display: inline; }
 
   .search-grid { grid-template-columns: 1fr; gap: 20px; }
   .admissions-cta { justify-self: start; }
@@ -599,6 +655,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   .brand__mark { width: 52px; height: 52px; }
   .section-title { font-size: 1.2rem; }
   .majors { grid-template-columns: 1fr 1fr; }
+  .major-taglines { grid-template-columns: 1fr; }
   .major-card__ja { font-size: 1rem; }
   .search { grid-template-columns: 1fr auto; }
   .search__label { grid-column: 1 / -1; }
