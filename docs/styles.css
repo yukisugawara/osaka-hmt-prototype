@@ -771,6 +771,246 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 }
 
 /* ---------------------------------------------------------
+   Campus pages
+--------------------------------------------------------- */
+.campus-info { padding: 48px 0 80px; display: grid; gap: 28px; }
+.campus-info .container { display: grid; gap: 28px; }
+.campus-card {
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+}
+.campus-card__title {
+  margin: 0 0 18px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-key);
+  letter-spacing: 0.04em;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--color-key-soft);
+}
+.campus-dl { margin: 0; display: grid; gap: 14px; }
+.campus-dl dt {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-key);
+  letter-spacing: 0.02em;
+}
+.campus-dl dd { margin: 0; font-size: 0.98rem; color: var(--color-ink); }
+.campus-note {
+  margin-top: 16px;
+  font-size: 0.86rem;
+  color: var(--color-ink-muted);
+  line-height: 1.7;
+}
+.campus-transport {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: grid;
+  gap: 18px;
+}
+.campus-transport li {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-line);
+}
+.campus-transport li:last-child { border-bottom: 0; padding-bottom: 0; }
+.campus-transport strong {
+  color: var(--color-key);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.campus-transport span { font-size: 0.94rem; line-height: 1.8; }
+
+.campus-contact { margin-bottom: 24px; }
+.campus-contact:last-child { margin-bottom: 0; }
+.campus-contact h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  color: var(--color-ink);
+  letter-spacing: 0.02em;
+}
+.campus-contact p {
+  margin: 0 0 6px;
+  font-size: 0.94rem;
+  line-height: 1.75;
+}
+.campus-contact em {
+  font-style: normal;
+  color: var(--color-key);
+  font-weight: 700;
+}
+.campus-contact__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.campus-contact__targets {
+  font-size: 0.86rem !important;
+  color: var(--color-key);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 4px 12px;
+  background: var(--color-key-soft);
+  border-radius: 999px;
+  display: inline-block;
+  margin-bottom: 8px !important;
+}
+
+/* ---------------------------------------------------------
+   Motion (option B: 中くらい・推奨)
+--------------------------------------------------------- */
+
+/* js-motion が付与されているときのみアニメ発火（JSなしのフォールバック対応） */
+
+/* (1) スクロール連動フェードイン */
+.js-motion .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.js-motion .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* (2) 5専攻カードの登場スタッガー */
+.js-motion .majors .major-card {
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  animation: cardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--stagger, 0s);
+}
+@keyframes cardIn {
+  to { opacity: 1; transform: none; }
+}
+
+/* (3) ヘッダーのスクロール圧縮 */
+.site-header {
+  transition: box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+.site-header.is-scrolled {
+  box-shadow: 0 4px 20px -10px rgba(20, 23, 60, 0.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.88);
+}
+.header-grid {
+  transition: padding 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.site-header.is-scrolled .header-grid {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.brand__mark {
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              height 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.site-header.is-scrolled .brand__mark {
+  width: 44px; height: 44px;
+}
+.brand__ja {
+  transition: font-size 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.site-header.is-scrolled .brand__ja {
+  font-size: 1.1rem;
+}
+
+/* (4) ブランドマークのホバー微アニメ */
+.brand__mark img {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.brand:hover .brand__mark img {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+/* (5) 5専攻カードのホバーにわずかな tilt 風リフト */
+.major-card {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.2s ease,
+    box-shadow 0.35s ease;
+}
+.major-card:hover {
+  transform: translateY(-4px) scale(1.015);
+}
+
+/* (6) お知らせタブのクロスフェード */
+.js-motion [data-panel] {
+  opacity: 0;
+  transition: opacity 0.28s ease-out;
+}
+.js-motion [data-panel].is-active { opacity: 1; }
+[data-panel][hidden] { display: none; }
+
+/* (7) ヒーローにごく薄い背景ブロブ（阪大色） */
+.hero { position: relative; overflow: hidden; }
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 560px; height: 560px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(53, 61, 157, 0.08) 0%,
+    rgba(53, 61, 157, 0) 70%);
+  top: -240px; right: -240px;
+  pointer-events: none;
+  z-index: 0;
+  animation: blobFloat 14s ease-in-out infinite;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 420px; height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(53, 61, 157, 0.06) 0%,
+    rgba(53, 61, 157, 0) 70%);
+  bottom: -200px; left: -160px;
+  pointer-events: none;
+  z-index: 0;
+  animation: blobFloat2 17s ease-in-out infinite;
+}
+.hero > .container { position: relative; z-index: 1; }
+@keyframes blobFloat {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-36px, 28px); }
+}
+@keyframes blobFloat2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(44px, -24px); }
+}
+
+/* (8) リンク下線の上品なトランジション */
+.link-arrow, .news__more, .utility a {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+/* アクセシビリティ：動きを減らす設定を尊重 */
+@media (prefers-reduced-motion: reduce) {
+  .js-motion .reveal,
+  .js-motion .majors .major-card,
+  .site-header,
+  .brand__mark,
+  .brand__ja,
+  .major-card {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero::before, .hero::after { animation: none; }
+}
+
+/* ---------------------------------------------------------
    Responsive
 --------------------------------------------------------- */
 @media (max-width: 960px) {
@@ -793,6 +1033,8 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   .news-grid:not(.news-grid--empty) { grid-template-columns: repeat(2, 1fr); }
   .major-hero__grid { grid-template-columns: 1fr; gap: 20px; }
   .course-list { grid-template-columns: 1fr; }
+  .campus-transport li { grid-template-columns: 1fr; gap: 4px; }
+  .campus-contact__row { grid-template-columns: 1fr; }
   .news-tabs { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
   .news-tabs button { white-space: nowrap; flex-shrink: 0; }
   .subgrid__inner { grid-template-columns: 1fr; }
