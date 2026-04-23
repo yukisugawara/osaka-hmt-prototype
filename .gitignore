@@ -3,7 +3,9 @@
 /styles.css
 /Symbol_bk_CMYK.jpg
 /en/
+/majors/
 /password_template.html
+/build_majors.py
 
 # 提案・参考資料
 *.docx

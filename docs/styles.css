@@ -418,6 +418,36 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   font-size: 0.95rem;
 }
 
+.news-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 24px;
+}
+.news-tabs button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1.5px solid var(--color-line);
+  background: #fff;
+  color: var(--color-ink);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.news-tabs button:hover {
+  border-color: var(--color-key);
+  color: var(--color-key);
+}
+.news-tabs button[aria-selected="true"] {
+  background: var(--color-key);
+  color: #fff;
+  border-color: var(--color-key);
+}
+
 .news-grid {
   list-style: none;
   padding: 0; margin: 0;
@@ -425,6 +455,16 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
+.news-grid--empty { grid-template-columns: 1fr; }
+.news-empty {
+  padding: 40px 24px;
+  background: #fff;
+  border-radius: var(--radius-md);
+  text-align: center;
+  color: var(--color-ink-muted);
+  box-shadow: var(--shadow-sm);
+}
+.news-empty a { color: var(--color-key); font-weight: 600; }
 .news-card a {
   display: grid;
   grid-template-rows: auto auto 1fr;
@@ -562,6 +602,117 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 }
 
 /* ---------------------------------------------------------
+   Major subpages
+--------------------------------------------------------- */
+.breadcrumb {
+  padding: 16px 0;
+  font-size: 0.88rem;
+  color: var(--color-ink-muted);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+.breadcrumb a { color: var(--color-key); font-weight: 600; }
+.breadcrumb span { margin: 0 8px; }
+
+.major-hero {
+  padding: 64px 0 40px;
+  background: linear-gradient(180deg, #fff 0%, #fafaff 100%);
+}
+.major-hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 48px;
+  align-items: end;
+}
+.major-hero__kicker {
+  font-family: var(--font-en);
+  letter-spacing: 0.22em;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-key);
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+.major-hero__title {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+}
+.major-hero__desc {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.9;
+  color: var(--color-ink);
+}
+
+.major-lead {
+  padding: 40px 0;
+  background: var(--color-key-soft);
+  border-top: 3px solid var(--color-key);
+  border-bottom: 3px solid var(--color-key);
+}
+.major-lead__title {
+  margin: 0 0 20px;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  line-height: 1.4;
+  color: var(--color-key);
+  letter-spacing: 0.03em;
+}
+.major-lead__degree {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-ink);
+  font-weight: 600;
+}
+.major-lead__degree span {
+  display: inline-block;
+  padding: 4px 12px;
+  margin-right: 12px;
+  background: #fff;
+  color: var(--color-key);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.major-courses { padding: 64px 0; }
+.major-courses__header { margin-bottom: 32px; }
+.course-list {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.course {
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-left: 4px solid var(--color-key);
+  border-radius: var(--radius-md);
+  padding: 24px 26px;
+  transition: box-shadow .15s ease, transform .15s ease;
+}
+.course:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.course__title {
+  margin: 0 0 10px;
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: var(--color-key);
+  letter-spacing: 0.02em;
+}
+.course__body {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.8;
+  color: var(--color-ink);
+}
+
+.major-cta { padding: 0 0 80px; }
+.major-cta .admissions-cta { font-size: 1.2rem; }
+
+/* ---------------------------------------------------------
    Footer
 --------------------------------------------------------- */
 .site-footer {
@@ -639,7 +790,11 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   .majors { grid-template-columns: repeat(2, 1fr); }
   .major-taglines { grid-template-columns: repeat(2, 1fr); }
-  .news-grid { grid-template-columns: repeat(2, 1fr); }
+  .news-grid:not(.news-grid--empty) { grid-template-columns: repeat(2, 1fr); }
+  .major-hero__grid { grid-template-columns: 1fr; gap: 20px; }
+  .course-list { grid-template-columns: 1fr; }
+  .news-tabs { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+  .news-tabs button { white-space: nowrap; flex-shrink: 0; }
   .subgrid__inner { grid-template-columns: 1fr; }
   .hero__brk--sp { display: inline; }
 
@@ -657,6 +812,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   .majors { grid-template-columns: 1fr 1fr; }
   .major-taglines { grid-template-columns: 1fr; }
   .major-card__ja { font-size: 1rem; }
+  .news-grid:not(.news-grid--empty) { grid-template-columns: 1fr; }
   .search { grid-template-columns: 1fr auto; }
   .search__label { grid-column: 1 / -1; }
   .news-grid { grid-template-columns: 1fr; }
