@@ -14,5 +14,8 @@
 .staticrypt.json
 node_modules/
 
+# スクレイピング作業ディレクトリ
+/scrape/
+
 # OS
 .DS_Store
